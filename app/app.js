@@ -7,7 +7,7 @@
             this.HOSTINGS_API = "http://oncaic.herokuapp.com/hostings";
             var hostingCtrl = this;
             var mapOptions = {
-                center: new google.maps.LatLng(41.614490, 0.627414),
+                center: new google.maps.LatLng(41.94894, 2.284156),
                 zoom: 8,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
@@ -20,31 +20,64 @@
                     }).then(
                     function(){
                         var imageHotel = "http://aba8.hol.es/hotel_0star.png";
+                        var imageCamping = "http://aba8.hol.es/camping-2.png";
+                        var imageRural = "http://aba8.hol.es/rockhouse-2.png";
                         angular.forEach(hostingCtrl.hostings, function(host) {
+                            var marker;
+                            if(host.type === "CAMPING" ){
+                                marker = new google.maps.Marker({
+                                    map: hostingCtrl.map,
+                                    position: new google.maps.LatLng(host.latitude, host.longitude),
+                                    title: host.name,
+                                    icon: imageCamping
+                                });
 
-                            var marker = new google.maps.Marker({
-                                map: hostingCtrl.map,
-                                position: new google.maps.LatLng(host.latitude, host.longitude),
-                                title: host.name,
-                                icon: imageHotel
+
+                            }
+                            else if(host.type === "ESTABLIMENT HOTELER" ){
+                                marker = new google.maps.Marker({
+                                    map: hostingCtrl.map,
+                                    position: new google.maps.LatLng(host.latitude, host.longitude),
+                                    title: host.name,
+                                    icon: imageHotel
+                                });
+                            } else {
+                                marker = new google.maps.Marker({
+                                    map: hostingCtrl.map,
+                                    position: new google.maps.LatLng(host.latitude, host.longitude),
+                                    title: host.name,
+                                    icon: imageRural
+                                });
+                            }
+
+                            google.maps.event.addListener(marker, 'click', function(){
+                                hostingCtrl.setCenterMarker(host);
+                                hostingCtrl.setDetails(host);
                             });
+
+
                         });
                     });
             };
 
+            this.setCenterMarker = function(host){
+                hostingCtrl.map.panTo(new google.maps.LatLng(host.latitude, host.longitude));
+                $timeout(function(){hostingCtrl.zoomIn()}, 250);
+            };
+
             this.setCenter = function(host){
                 hostingCtrl.zoomOut();
-                $timeout(function(){hostingCtrl.map.panTo(new google.maps.LatLng(host.latitude, host.longitude))}, 250);
-                $timeout(function(){hostingCtrl.zoomIn()}, 500);
+                $timeout(function(){hostingCtrl.map.panTo(new google.maps.LatLng(host.latitude, host.longitude))}, 500);
+                $timeout(function(){hostingCtrl.zoomIn()}, 750);
             };
 
             this.zoomIn = function(){
                 var current = hostingCtrl.map.getZoom();
-                if(current >= 12){
+                if(current >= 13){
                     return 0;
                 }
                 else{
-                    hostingCtrl.map.setZoom(current+1);
+                    hostingCtrl.map.setZoom(current+2);
                     $timeout(function(){hostingCtrl.zoomIn()},50);
                 }
             };

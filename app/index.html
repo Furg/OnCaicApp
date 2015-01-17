@@ -14,31 +14,75 @@
 </head>
 <body ng-app="mapsApp" ng-controller="MapCtrl as cont" ng-init="cont.listHostings()">
 <div id="container">
-    <h2>HOSTING FINDER</h2>
-    <div id="list4">
+    <header><h1>HOSTING FINDER</h1></header>
+    <nav id="list4">
         <ul ng-repeat="hosting in cont.hostings">
             <li>
-                <a ng-click="cont.setCenter(hosting); cont.setDetails(hosting)">{{hosting.name}}</a>
+                <article><a ng-click="cont.setCenter(hosting); cont.setDetails(hosting)">{{hosting.name}}</a></article>
             </li>
         </ul>
-    </div>
-    <div id="map"></div>
+    </nav>
+    <figure id="map"></figure>
     <div id="details" ng-show="cont.selected">
-        <h1>{{cont.details.name}}</h1>
-        <p>{{cont.details.email}}</p>
-        <p>{{cont.details.type}}</p>
-        <p>{{cont.details.web}}</p>
-        <p>{{cont.details.street}}</p>
-        <p>{{cont.details.postalcode}}</p>
-        <p>{{cont.details.city}}</p>
-        <p>{{cont.details.region}}</p>
-        <p>{{cont.details.province}}</p>
-        <p>{{cont.details.phonenumber}}</p>
-        <p>{{cont.details.owner}}</p>
-        <p>{{cont.details.latitude}}</p>
-        <p>{{cont.details.longitude}}</p>
+        <table class="rwd-table">
+            <tr>
+                <th>Name</th>
+                <td>{{cont.details.name}}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{cont.details.type}}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{cont.details.email}}</td>
+            </tr>
+            <tr>
+                <th>Web</th>
+                <td>{{cont.details.web}}</td>
+            </tr>
+            <tr>
+                <th>Province</th>
+                <td>{{cont.details.province}}</td>
+            </tr>
+            <tr>
+                <th>Region</th>
+                <td>{{cont.details.region}}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{cont.details.city}}</td>
+            </tr>
+            <tr>
+                <th>Postal Code</th>
+                <td>{{cont.details.postalcode}}</td>
+            </tr>
+            <tr>
+                <th>Street</th>
+                <td>{{cont.details.street}}</td>
+            </tr>
+            <tr>
+                <th>Phone Number</th>
+                <td>{{cont.details.phonenumber}}</td>
+            </tr>
+            <tr>
+                <th>Owner</th>
+                <td>{{cont.details.owner}}</td>
+            </tr>
+            <tr>
+                <th>Latitude</th>
+                <td>{{cont.details.latitude}}</td>
+            </tr>
+            <tr>
+                <th>Longitude</th>
+                <td>{{cont.details.longitude}}</td>
+            </tr>
+        </table>
     </div>
 </div>
+<footer>
+    <a href="http://aba8.hol.es/random.jpg">Rafa Durán, Àngel Buil ©</a>
+</footer>
 </body>
 </html>
 
